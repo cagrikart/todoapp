@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { GrFormClose, GrFormEdit, GrFormCheckmark } from 'react-icons/gr';
-import { useTodoLayerValue } from '../context/TodoContext';
+import React, { useState } from "react";
+import clsx from "clsx";
+import { GrFormClose, GrFormEdit, GrFormCheckmark } from "react-icons/gr";
+import { useTodoLayerValue } from "../context/TodoContext";
+
 const Todo = ({ todo }) => {
-  const [{}, dispatch] = useTodoLayerValue();
+  const [, dispatch] = useTodoLayerValue();
   const [editable, setEditable] = useState(false);
   const [content, setContent] = useState(todo.content);
 
   const completeTodo = (todoId) => {
     dispatch({
-      type: 'COMPLETE_TODO',
+      type: "COMPLETE_TODO",
       payload: todoId,
     });
   };
   const removeTodo = (todoId) => {
     dispatch({
-      type: 'REMOVE_TODO',
+      type: "REMOVE_TODO",
       payload: todoId,
     });
   };
 
   const updateTodo = ({ todoId, newValue }) => {
     dispatch({
-      type: 'UPDATE_TODO',
+      type: "UPDATE_TODO",
       payload: {
         todoId,
         newValue,
@@ -31,13 +32,13 @@ const Todo = ({ todo }) => {
   };
 
   const todoStyle = clsx({
-    ['todo-row']: true,
-    ['completed']: todo.isCompleted,
+    "todo-row": true,
+    completed: todo.isCompleted,
   });
 
   return (
     <div className={todoStyle}>
-      <div onClick={() => (editable ? '' : completeTodo(todo.id))}>
+      <div onClick={() => (editable ? "" : completeTodo(todo.id))}>
         {editable ? (
           <input
             type="text"
@@ -60,7 +61,7 @@ const Todo = ({ todo }) => {
             onClick={() => {
               updateTodo({ todoId: todo.id, newValue: content });
               setEditable(false);
-              setContent('');
+              setContent("");
             }}
           />
         ) : (
